@@ -16,6 +16,6 @@ public class AbsoluteDifference{
 	public static void main(String[] args) {
 		int[] a = {4,1,8,7};
 		int[] b = {2,3,6,5};
-		System.out.println(minDiff(a, b));
+		System.out.println("Minimum Absolute Difference in pair is: "+minDiff(a, b));
 	}
 }
