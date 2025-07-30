@@ -70,6 +70,42 @@ public class Traversal{
 				}
 			}
 		}
+
+		static class Info{
+			Node node;
+			int d;
+
+			Info(Node node, int d){
+				this.node = node;
+				this.d = d;
+			}
+		}
+
+		// Level Order Traversal in list
+		public static List<List<Integer>> levelTraversal(Node root){
+			List<List<Integer>> result = new ArrayList<>();
+			if(root == null) return result;
+
+			Queue<Info> q = new LinkedList<>();
+			Map<Integer, Integer>  map = new HashMap<>();
+			q.add(new Info(root, 0));
+
+			while(!q.isEmpty()){
+				Info currInfo = q.poll();
+				Node curr = currInfo.node;
+				int d = currInfo.d;
+
+				map.put(hd, curr.data);
+
+				if(root.left != null){
+					q.add(new Info(curr.left, d+1));
+				}
+
+				if(root.right != null){
+					q.add(new Info(curr.right, ))
+				}
+			}
+		}
 	}
 	public static void main(String[] args) {
 		int[] arr = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
