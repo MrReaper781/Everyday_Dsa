@@ -27,21 +27,23 @@ public class PathSum{
 			return newNode;
 		}
 
+		public static int sum(Node root){
+			if(root == null) return 0;
+			int left = sum(root.left);
+			int right = sum(root.right);
+
+			int sum = left + right + root.data;
+			return sum;
+		}
 		public static boolean exists(Node root, int target){
 			if(root == null) return false;
-
-			int left = exists(root.left);
-			int right = exists(root.right);
-
-			int sum = 0;
-			sum = left + right + root.data;
-
-			if(sum == target) return true;
+			if(sum(root) == target) return true;
+			return exists(root.left, target-root.data) || exists(root.right, target-root.data);
 		}
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {5, 4, 7, 11, -1, -1, 2, -1, -1, -1, 8, 13, -1, -1, 4, -1, 1, -1, -1};
+		int[] arr = {5, 4, 11, 7, -1, -1, 2, -1, -1, -1, 8, 13, -1, -1, 4, -1, 1, -1, -1};
 		BT tree = new BT();
 		Node root = tree.buildTree(arr);
 
