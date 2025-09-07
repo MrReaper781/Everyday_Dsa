@@ -169,7 +169,7 @@ public class LL {
     public void reverse() {
         Node prev = null;
         Node curr = head;
-        Node next;
+        Node next = null;
         while (curr != null) {
             next = curr.next;
             curr.next = prev;
