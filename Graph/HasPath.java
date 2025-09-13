@@ -10,6 +10,17 @@ public class HasPath{
 		}
 	}
 
+	static class Path{
+		int src;
+		int dest;
+		int cnt;
+		Path(int src, int dest, int cnt){
+			this.src = src;
+			this.dest = dest;
+			this.cnt = cnt;
+		}
+	}
+
 	public static void createGraph(ArrayList<Edge>[] graph){
 		for(int i=0; i<graph.length; i++){
 			graph[i] = new ArrayList<>();
@@ -53,13 +64,41 @@ public class HasPath{
 		return false;
 	}
 
-	public static void main(String[] args) {
-		int V = 7;
-		@SuppressWarnings("unchecked")
-		ArrayList<Edge>[] graph = (ArrayList<Edge>[]) new ArrayList[V];
-		createGraph(graph);
+	public static int allPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] vis) {
+	    if (src == dest) {
+	        return 1; // Found one valid path
+	    }
 
-		System.out.println(hasPath(graph, 0, 5, new boolean[V]));
-		System.out.println(hasPath(graph, 0, 7, new boolean[V]));
+	    vis[src] = true;
+	    int count = 0;
+
+	    for (Edge e : graph[src]) {
+	        if (!vis[e.dest]) {
+	            count += allPath(graph, e.dest, dest, vis);
+	        }
+	    }
+
+	    vis[src] = false; // Backtrack
+	    return count;
+	}
+
+	public static void printList(ArrayList<Integer> arr){
+		for(int i=0; i<arr.size(); i++){
+			System.out.print(arr.get(i) + " ");
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+	    int V = 7;
+	    @SuppressWarnings("unchecked")
+	    ArrayList<Edge>[] graph = (ArrayList<Edge>[]) new ArrayList[V];
+	    createGraph(graph);
+
+	    System.out.println("Has path from 0 to 5: " + hasPath(graph, 0, 5, new boolean[V]));
+	    System.out.println("Has path from 0 to 6: " + hasPath(graph, 0, 6, new boolean[V]));
+
+	    System.out.println("Total paths from 0 to 5: " + allPath(graph, 0, 5, new boolean[V]));
+	    System.out.println("Total paths from 0 to 2: " + allPath(graph, 0, 2, new boolean[V]));
 	}
 }

@@ -1,62 +1,69 @@
+import java.util.*;
+
 public class Practice{
-	static class Node{
-		int data;
-		Node left;
-		Node right;
+	// Pangram
+	// public static boolean pangram(int n, String s) {
+	//     if (n != s.length()) return false;
+	//     String b = s.toLowerCase();
+	//     Set<Character> set = new HashSet<>();
 
-		Node(int data){
-			this.data = data;
-			this.left = this.right = null;
-		}
+	//     for (int i = 0; i < n; i++) {
+	//         char c = b.charAt(i);
+	//         if (c >= 'a' && c <= 'z') {
+	//             set.add(c);
+	//         }
+	//     }
+
+	//     return set.size() == 26;
+	// }
+
+
+	//Minimize
+	// public static int minimize(int a, int b){
+	// 	if(a<1 || b<1 || a>10 || b>10) return 0;
+
+	// 	int min = Integer.MAX_VALUE;
+	// 	for(int i=1; i<=10; i++){
+	// 		int sum = Math.abs(i - a) + Math.abs(b - i);
+	// 		min = Math.min(min, sum);
+	// 	}
+	// 	return min;
+	// }
+
+	//Minutes before the new year
+	public static int minutesLeft(int a, int b){
+		int hoursToMin = a * 60;
+		int totalMin = hoursToMin + b;
+		return 1440 - totalMin;
 	}
 
-	public static Node insert(Node root, int data){
-		if(root == null){
-			return new Node(data);
-		}
-		if(root.data > data){
-			root.left = insert(root.left, data);
-		}
-		if(root.data < data){
-			root.right = insert(root.right, data);
-		}
-		return root;
-	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 
-	public static void inOrder(Node root){
-		if(root == null){
-			return;
+		//Pangram
+		// int n = sc.nextInt();
+		// String a = sc.next();
+
+		// if(pangram(n, a)){
+		// 	System.out.println("Yes");
+		// }else{
+		// 	System.out.println("No");
+		// }
+
+		//Minimize
+		// int n = sc.nextInt();
+		// while(n-- != 0){
+		// 	int a = sc.nextInt();
+		// 	int b = sc.nextInt();
+		// 	System.out.println(minimize(a, b));
+		// }
+
+		//Minutes left before the new year
+		int n =sc.nextInt();
+		while(n-- != 0){
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			System.out.println(minutesLeft(a,b));
 		}
-		inOrder(root.left);
-		System.out.print(root.data + " ");
-		inOrder(root.right);
-	}
-
-	public static boolean search(Node root, int data){
-		if(root == null) return false;
-		if(root.data == data){
-			return true;
-		}else if(root.data > data){
-			return search(root.left, data);
-		}else if(root.data < data){
-			return search(root.right, data);
-		}
-		return false;
-	}
-
-	public static Node delete(Node root, int data){
-		
-	}
-
-	public static void main(String[] args){
-		int[] arr = {5,1,3,4,2,7};
-		Node root = null;
-		for(int i=0; i<arr.length; i++){
-			root = insert(root, arr[i]);
-		}
-		inOrder(root);
-		System.out.println();
-
-		System.out.println(search(root, 4));
 	}
 }
